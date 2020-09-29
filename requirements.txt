@@ -1,0 +1,5 @@
+webdriver_manager==3.2.2
+selenium==3.141.0
+bios==0.1.2
+requests==2.24.0
+browsermob_proxy==0.8.0

@@ -1,0 +1,58 @@
+username: "xxxx@xx.xx.xx.xx.xx" #your email
+password: "xxxx" #your password
+####################################################################
+phrases: #config for phrases quiz
+  content: #left is id, right is boolean for enable or disable
+    - id: 19 # do not change if you don't know
+      title: "introduction"
+      score: 5 # do not change if you don't know
+      enabled: false
+      iteration: 50
+    - id: 20 # do not change if you don't know
+      title: "presetation structure"
+      score: 4 # do not change if you don't know
+      enabled: true
+      iteration: 50
+    - id: 21 # do not change if you don't know
+      title: "timing"
+      score: 4 # do not change if you don't know
+      enabled: false
+      iteration: 10
+    - id: 22 # do not change if you don't know
+      title: "handouts"
+      score: 4 # do not change if you don't know
+      enabled: false
+      iteration: 10
+    - id: 23 # do not change if you don't know
+      title: "questions"
+      score: 3 # do not change if you don't know
+      enabled: false
+      iteration: 10
+    - id: 24 # do not change if you don't know
+      title: "sequencing"
+      score: 5 # do not change if you don't know
+      enabled: false
+      iteration: 10
+    - id: 25 # do not change if you don't know
+      title: "highlight information"
+      score: 5 # do not change if you don't know
+      enabled: false
+      iteration: 10
+    - id: 26 # do not change if you don't know
+      title: "conclusion"
+      score: 2 # do not change if you don't know
+      enabled: false
+      iteration: 10
+####################################################################
+dailyGrammar:
+  browsermobPath: "/homelab/app/browsermob-proxy/"
+  iteration: 2
+####################################################################
+dailyDictation:
+  browsermobPath: "/homelab/app/browsermob-proxy/"
+  iteration: 1
+####################################################################
+wait_time: #random number between
+  from: 7
+  to: 15
+headless: false
