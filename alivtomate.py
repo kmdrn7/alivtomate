@@ -151,13 +151,14 @@ class Alivtomate(unittest.TestCase):
         self.loginCasMis()
 
         driver = self.driver
-        driver.get("https://aliv.lecturer.pens.ac.id/quizzes/daily-grammar-quiz/")
-        time.sleep(3)
 
         print("+----------------------------------------")
         print("| Daily Grammar                          |")
         print("+----------------------------------------")
         for itr in range(1, self.config.get('dailyGrammar').get('iteration')+1):
+            driver.get("https://aliv.lecturer.pens.ac.id/quizzes/daily-grammar-quiz/")
+            time.sleep(8)
+
             self.proxy.new_har('req', options={'captureHeaders': True,'captureContent':True})
             print("+========================================")
             print("| Iteration: " + str(itr))
@@ -165,7 +166,7 @@ class Alivtomate(unittest.TestCase):
 
             startButton = driver.find_element_by_name("startQuiz")
             startButton.click()
-            time.sleep(5)
+            time.sleep(8)
 
             responseJson = ""
             for ent in self.proxy.har['log']['entries']:
@@ -194,32 +195,25 @@ class Alivtomate(unittest.TestCase):
                 print("|")
 
             liCorrect = driver.find_elements_by_class_name('wpProQuiz_questionListItem')[idx]
-            submitButton = driver.find_element_by_name('next')
-            continueButton = driver.find_element_by_id('quiz_continue_link')
-
             liCorrect.click()
-            time.sleep(3)
+            time.sleep(5)
 
+            submitButton = driver.find_element_by_name('next')
             submitButton.click()
-            time.sleep(7)
-
-            continueButton.click()
-            time.sleep(random.randint(
-                self.config.get('wait_time').get('from'),
-                self.config.get('wait_time').get('to')
-            ))
+            time.sleep(15)
 
     def test_DailyDictation(self):
         self.loginCasMis()
 
         driver = self.driver
-        driver.get("https://aliv.lecturer.pens.ac.id/quizzes/daily-dictation/")
-        time.sleep(3)
 
         print("+----------------------------------------")
         print("| Daily Dictation                       |")
         print("+----------------------------------------")
         for itr in range(1, self.config.get('dailyDictation').get('iteration')+1):
+            driver.get("https://aliv.lecturer.pens.ac.id/quizzes/daily-dictation/")
+            time.sleep(8)
+
             self.proxy.new_har('req', options={'captureHeaders': True,'captureContent':True})
             print("+========================================")
             print("| Iteration: " + str(itr))
@@ -227,7 +221,7 @@ class Alivtomate(unittest.TestCase):
 
             startButton = driver.find_element_by_name("startQuiz")
             startButton.click()
-            time.sleep(5)
+            time.sleep(8)
 
             responseJson = ""
             for ent in self.proxy.har['log']['entries']:
@@ -253,23 +247,15 @@ class Alivtomate(unittest.TestCase):
 
             inputan = driver.find_element_by_xpath("//input[@data-wordlen='"+ str(len(answer)) +"']")
             inputan.send_keys(answer)
-            time.sleep(1)
+            time.sleep(2)
 
             checkButton = driver.find_element_by_name('check')
             checkButton.click()
-            time.sleep(4)
+            time.sleep(5)
 
             finishButton = driver.find_element_by_name('next')
             finishButton.click()
-            time.sleep(7)
-
-            continueButton = driver.find_element_by_id('quiz_continue_link')
-            continueButton.click()
-
-            time.sleep(random.randint(
-                self.config.get('wait_time').get('from'),
-                self.config.get('wait_time').get('to')
-            ))
+            time.sleep(15)
 
     def tearDown(self):
         self.driver.close()
