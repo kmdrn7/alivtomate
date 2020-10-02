@@ -200,7 +200,7 @@ class Alivtomate(unittest.TestCase):
 
             submitButton = driver.find_element_by_name('next')
             submitButton.click()
-            time.sleep(15)
+            time.sleep(20)
 
     def test_DailyDictation(self):
         self.loginCasMis()
@@ -255,7 +255,7 @@ class Alivtomate(unittest.TestCase):
 
             finishButton = driver.find_element_by_name('next')
             finishButton.click()
-            time.sleep(15)
+            time.sleep(20)
 
     def tearDown(self):
         self.driver.close()
