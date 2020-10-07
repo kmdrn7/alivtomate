@@ -39,6 +39,111 @@ class Alivtomate(unittest.TestCase):
         pass_field.send_keys(Keys.RETURN)
         time.sleep(10)
 
+    def prepareH5P(self, url, config):
+        driver = self.driver
+        driver.get(url);
+
+        phpsessid = ""
+        wp_test_cuk = ""
+        wp_logged_in = ""
+        wp_logged_in_val = ""
+        wfwaf = ""
+        wfwaf_val = ""
+
+        cukis = driver.get_cookies()
+
+        for cuk in cukis:
+            cukname = cuk.get('name')
+            cukval = cuk.get('value')
+            ###########################################
+            if cukname == 'PHPSESSID':
+                phpsessid = cukval
+                continue
+            ###########################################
+            if cukname == 'wordpress_test_cookie':
+                wp_test_cuk = cukval
+                continue
+            ###########################################
+            if 'wordpress_logged_in' in cukname:
+                wp_logged_in = cukname
+                wp_logged_in_val = cukval
+                continue
+            ###########################################
+            if 'wfwaf-authcookie' in cukname:
+                wfwaf = cukname
+                wfwaf_val = cukval
+                continue
+            ###########################################
+
+        skrip = driver.find_elements_by_xpath("//script[contains(text(), 'H5PIntegration')]")
+        token = skrip[0].get_property('innerText')[216:226]
+
+        cookies = {
+            'whatsup': 'whatsupman',
+            'PHPSESSID': phpsessid,
+            'wordpress_test_cookie': wp_test_cuk,
+            wp_logged_in: wp_logged_in_val,
+            wfwaf: wfwaf_val,
+        }
+        print(cookies)
+
+        headers = {
+            'Connection': 'keep-alive',
+            'Accept': '*/*',
+            'X-Requested-With': 'XMLHttpRequest',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'Origin': 'https://aliv.lecturer.pens.ac.id',
+            'Sec-Fetch-Site': 'same-origin',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Dest': 'empty',
+            'Referer': url,
+            'Accept-Language': 'en-US,en;q=0.9,id;q=0.8,jv;q=0.7',
+        }
+        print(headers)
+
+        params = (
+            ('token', token),
+            ('action', 'h5p_setFinished'),
+        )
+        print(params)
+
+        for Content in self.config.get(config).get('content'):
+            print("+----------------------------------------")
+            print("| Phrases: " + Content.get('title'))
+            print("+----------------------------------------")
+            if Content.get('enabled'):
+                opened = time.time()
+                finished = opened+random.randint(195,348)
+                ####################################################
+                for itr in range(1, Content.get('iteration')+1):
+                    print("+========================================")
+                    print("| Iteration: " + str(itr))
+                    print("+========================================")
+                    ################################################
+                    data = {
+                        'contentId': Content.get('id'),
+                        'score': Content.get('score'),
+                        'maxScore': Content.get('score'),
+                        'opened': str(opened)[0:10],
+                        'finished': str(finished)[0:10]
+                    }
+                    time.sleep(random.randint(
+                        self.config.get('wait_time').get('from'),
+                        self.config.get('wait_time').get('to')
+                    ))
+                    opened = finished+random.randint(234, 509)
+                    finished = opened+random.randint(195, 348)
+                    response = requests.post('https://aliv.lecturer.pens.ac.id/wp-admin/admin-ajax.php', headers=headers, params=params, cookies=cookies, data=data)
+                    print("| " + str(response.content))
+                    print("+========================================")
+                    print("|")
+                    #################################################
+            else:
+                print("| SKIPPING ....")
+                print("+========================================")
+                print("|")
+
     def test_PhraseForPresentation(self):
         self.loginCasMis()
 
@@ -145,6 +250,10 @@ class Alivtomate(unittest.TestCase):
                 print("| SKIPPING ....")
                 print("+========================================")
                 print("|")
+
+    def test_AdvancedVocabulary(self):
+        self.loginCasMis()
+        self.prepareH5P("https://aliv.lecturer.pens.ac.id/advanced-vocabulary/", "advancedVocab")
 
     def test_DailyGrammarQuiz(self):
         self.loginCasMis()
