@@ -11,8 +11,8 @@ phrases: #config for phrases quiz
     - id: 20 # do not change if you don't know
       title: "presetation structure"
       score: 4 # do not change if you don't know
-      enabled: false
-      iteration: 50
+      enabled: true
+      iteration: 10
     - id: 21 # do not change if you don't know
       title: "timing"
       score: 4 # do not change if you don't know
@@ -44,13 +44,21 @@ phrases: #config for phrases quiz
       enabled: false
       iteration: 10
 ####################################################################
+advancedVocab:
+  content:
+    - id: 28 # do not change if you don't know
+      title: "Advanced Vocabulary"
+      score: 10 # do not change if you don't know
+      enabled: true
+      iteration: 5
+####################################################################
 dailyGrammar:
   browsermobPath: "/homelab/app/browsermob-proxy/"
-  iteration: 5
+  iteration: 10
 ####################################################################
 dailyDictation:
   browsermobPath: "/homelab/app/browsermob-proxy/"
-  iteration: 5
+  iteration: 10
 ####################################################################
 wait_time: #random number between
   from: 8
