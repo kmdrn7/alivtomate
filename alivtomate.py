@@ -13,14 +13,13 @@ import unittest
 class Alivtomate(unittest.TestCase):
     def setUp(self):
         self.config = bios.read('config.yaml')
-
         self.server = Server(self.config.get('dailyGrammar').get('browsermobPath') + "bin/browsermob-proxy")
         self.server.start()
         self.proxy = self.server.create_proxy()
-
         options = webdriver.ChromeOptions()
         options.add_argument('--proxy-server={host}:{port}'.format(host='localhost', port=self.proxy.port))
         options.add_argument("--ignore-certificate-errors")
+        options.add_argument("--window-size=1920,1080")
         if self.config.get('headless'):
             options.add_argument('--headless')
             print("Chrome is running in headless mode")
