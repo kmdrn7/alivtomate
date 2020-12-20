@@ -12,6 +12,8 @@ Example 3 : python alivtomate.py Alivtomate.test_DailyDictation
 
 Example 4 : python alivtomate.py Alivtomate.test_AdvancedVocabulary
 
+Example 5 : python alivtomate.py Alivtomate.test_Remedial
+
 Download BrowserMob-Proxy : https://bmp.lightbody.net/
 
 NP : Jangan lupa atur config dulu ya ^^
