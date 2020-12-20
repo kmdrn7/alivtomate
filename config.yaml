@@ -49,6 +49,12 @@ advancedVocab:
     - id: 28 # do not change if you don't know
       title: "Advanced Vocabulary"
       score: 10 # do not change if you don't know
+####################################################################
+remed:
+  content:
+    - id: 31 # do not change if you don't know
+      title: "conclusion"
+      score: 21 # do not change if you don't know
       enabled: true
       iteration: 5
 ####################################################################
@@ -61,6 +67,6 @@ dailyDictation:
   iteration: 10
 ####################################################################
 wait_time: #random number between
-  from: 8
-  to: 15
+  from: 20
+  to: 40
 headless: false

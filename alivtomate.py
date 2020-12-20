@@ -255,6 +255,10 @@ class Alivtomate(unittest.TestCase):
         self.loginCasMis()
         self.prepareH5P("https://aliv.lecturer.pens.ac.id/advanced-vocabulary/", "advancedVocab")
 
+    def test_Remedial(self):
+        self.loginCasMis()
+        self.prepareH5P("https://aliv.lecturer.pens.ac.id/uts-remedial/", "remed")
+
     def test_DailyGrammarQuiz(self):
         self.loginCasMis()
 
